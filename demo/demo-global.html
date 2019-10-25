@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../node_modules/es5-shim/es5-shim.js"></script>
+    <script src="../node_modules/es5-shim/es5-sham.js"></script>
+    
+    <script src="../dist/index.aio.js"></script>
+    <script>
+        console.log(window['@jsmini/util-tools'])
+        const base = window['@jsmini/util-tools']
+        var list = [{pid: 0, name: '1234', id: 1578841}, {pid: 1578841, name: 87665, id: 56456798}, {pid: 56456798, name: '77777', id: 55879879}]
+        console.log(base)
+        var tree = base.__ToTree(list, 'pid')
+        console.log(tree)
+    </script>
+</body>
+</html>
