@@ -7,7 +7,7 @@
 [![NPM downloads](http://img.shields.io/npm/dm/@jsmini/util-tools.svg?style=flat-square)](http://www.npmtrends.com/@jsmini/util-tools)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/jdeseva/@jsmini/util-tools.svg)](http://isitmaintained.com/project/jdeseva/@jsmini/util-tools "Percentage of issues still open")
 
-最好用的 `JS|TS` 第三方库脚手架
+自用 `JS|TS` 工具函数
 
 ## :star: 特性
 
@@ -20,9 +20,9 @@
 ## :pill: 兼容性
 单元测试保证支持如下环境：
 
-| IE   | CH   | FF   | SF   | OP   | IOS  | Android   | Node  |
-| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ----- |
-| 6+   | 29+ | 55+  | 9+   | 50+  | 9+   | 4+   | 4+ |
+| IE  | CH  | FF  | SF  | OP  | IOS | Android | Node |
+| --- | --- | --- | --- | --- | --- | ------- | ---- |
+| 6+  | 29+ | 55+ | 9+  | 50+ | 9+  | 4+      | 4+   |
 
 **注意：编译代码依赖ES5环境，对于ie6-8需要引入[es5-shim](http://github.com/es-shims/es5-shim/)才可以兼容，可以查看[demo/demo-global.html](./demo/demo-global.html)中的例子**
 

@@ -10,7 +10,7 @@
 /**
  * 单次执行函数，页面加载后只能执行一次
  * @param method {Function} 传入的函数
- * @returns 返回函数执行结果
+ * @returns {Function} 返回函数
  */
 export function __Once(method: Function): Function {
     let done = false
@@ -22,8 +22,8 @@ export function __Once(method: Function): Function {
 /**
  * 防抖函数
  * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} delay 多少毫秒内连续触发事件，不会执行
- * @returns - 返回包装之后的函数
+ * @param {Number} [delay = 500] - 多少毫秒内连续触发事件，不会执行
+ * @returns {Function} - 返回包装之后的函数
  */
 export function __Debounce(method: Function, delay: number = 500): Function {
     let timer: number | null = null
@@ -40,8 +40,8 @@ export function __Debounce(method: Function, delay: number = 500): Function {
 /**
  * 节流函数
  * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} delay 间隔多少毫秒需要触发一次事件
- * @returns - 返回包装之后的函数
+ * @param {Number} [delay = 500] - 间隔多少毫秒需要触发一次事件
+ * @returns {Function} - 返回包装之后的函数
  */
 export function __Throttle(method: Function, delay: number = 500): Function {
     let timer: number
@@ -97,11 +97,11 @@ export function __ToTree(
 }
 
 /**
- * 将对象Map转化为List
+ * 将map字典对象转化为List
  * @param {Object} map Map对象
- * @param {String} key 键名
- * @param {String} val 值
- * @returns {Array<Object>}
+ * @param {String} [key = name] 键名
+ * @param {String} [val = value] 键值
+ * @returns {Array<Object>} 返回数组
  */
 export function __MapToArray(
     map: object,
@@ -119,11 +119,11 @@ export function __MapToArray(
 }
 
 /**
- * 将数组转化为对象类型
+ * 将数组转化为字典对象类型
  * @param {Array} array 数据
- * @param {String} key 键名
- * @param {String} val 键值
- * @returns {Object}
+ * @param {String} [key = name] 键名
+ * @param {String} [val = value] 键值
+ * @returns {Object} 返回map对象字典
  */
 export function __ArrayToMap(
     array: object[],
@@ -190,7 +190,6 @@ export class Storage {
             }
             return window['$Storage']
         }
-        console.log(8888)
         return this
     }
 

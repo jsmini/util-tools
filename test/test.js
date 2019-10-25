@@ -4,7 +4,6 @@ var sinon = require('sinon')
 // ts 测试编译后文件
 
 var base = require('../src/index.ts')
-console.log(base)
 
 describe('单元测试', function() {
     this.timeout(1000)
