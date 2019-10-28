@@ -5,7 +5,7 @@ var sinon = require('sinon')
 
 var base = require('../src/index.ts')
 
-describe('单元测试', function() {
+describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行测试才能完全通过', function() {
     this.timeout(1000)
 
     let count = -1
@@ -58,11 +58,14 @@ describe('单元测试', function() {
             expect(count).to.equal(0)
             done()
         })
-        it('超过设定延迟执行1遍，结果应该为 1', async done => {
+        it('超过设定延迟执行1遍，结果应该为 1', () => {
+            const clock = sinon.useFakeTimers()
+            const logSpy = sinon.spy(console, 'log')
             fn()
-            this.timeout(1000)
+            clock.tick(200)
+            logSpy.restore()
+            clock.restore()
             expect(count).to.equal(1)
-            done()
         })
     })
 
@@ -75,14 +78,18 @@ describe('单元测试', function() {
         var fn = __Throttle(() => {
             count = count + 1
         }, 100)
-        it('一定时间重复执行n遍，结果应该等于 1 * ( 时间 / 间隔 )', async done => {
+        it('一定时间重复执行n遍，结果应该等于 1 * (( 时间 / 间隔 ) - 1 )', () => {
+            const clock = sinon.useFakeTimers()
+            const logSpy = sinon.spy(console, 'log')
+
             var timer = setInterval(() => {
                 fn()
-            }, 50)
-            this.timeout(500)
+            }, 10)
+            clock.tick(200)
             clearInterval(timer)
-            expect(count).to.equal(5)
-            done()
+            logSpy.restore()
+            clock.restore()
+            expect(count).to.equal(1)
         })
     })
 
@@ -198,29 +205,5 @@ describe('单元测试', function() {
                 expect(k).to.be(null)
             })
         }
-    })
-
-    function foo() {
-        setTimeout(function() {
-            console.log('bar')
-        }, 100)
-    }
-
-    //用 sinon 两个特写，
-
-    describe('1111', () => {
-        it('adasd', () => {
-            const clock = sinon.useFakeTimers()
-            const logSpy = sinon.spy(console, 'log')
-
-            foo()
-
-            expect(logSpy).to.not.have.been.called
-            clock.tick(100)
-            expect(logSpy).to.have.been.calledOnce
-
-            logSpy.restore()
-            clock.restore()
-        })
     })
 })
