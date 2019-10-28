@@ -2,7 +2,7 @@
  * @author jsy七七
  * @date 2019.10.24
  * @description 自用工具类函数，包含常用的自定义工具类函数，不定期整理更新。欢迎提出issue
- * @homePage https://github.com/jdeseva/eva-utils
+ * @homePage https://github.com/jsmini/util-tools
  */
 
 /** ******************************************************** */
