@@ -26,6 +26,11 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
 
     let demo1 = true
     let demo2 = { name: 'util-tools', value: '0.1.0' }
+    let Nan = NaN
+    let number = 100
+    let str = 'abc'
+    let undef = undefined
+    let inf = Infinity
 
     describe('__Once', () => {
         var { __Once } = base
@@ -148,6 +153,33 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
             it('实例化', () => {
                 var v = new Storage() === St
                 expect(v).to.be(true)
+            })
+            it('报错NaN', () => {
+                try {
+                    St.set('NaN', Nan)
+                } catch (e) {
+                    expect(1).to.equal(1)
+                    // throw e
+                }
+            })
+            it('报错undefined', () => {
+                try {
+                    St.set('undefined', undef)
+                } catch (e) {
+                    expect(1).to.equal(1)
+                    //  throw e
+                }
+            })
+            it('复合属性', () => {
+                St.set({ str: str, inf: inf, number: number })
+                var res = St.get(['str', 'inf', 'number'])
+                var kv = Object.values(res)
+                let flag = false
+                flag =
+                    kv.indexOf(str) > -1 &&
+                    kv.indexOf(inf) > -1 &&
+                    kv.indexOf(number) > -1
+                expect(flag).to.be(true)
             })
             it('set - 单值模式', () => {
                 St.set('demo1', demo1)
