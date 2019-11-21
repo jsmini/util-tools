@@ -21,9 +21,9 @@ export function __Once(method: Function): Function {
 
 /**
  * 防抖函数
- * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} [delay = 500] - 多少毫秒内连续触发事件，不会执行
- * @returns {Function} - 返回包装之后的函数
+ * @param method {Function}  事件触发的操作，传入的函数
+ * @param delay {Number} - [delay = 500]  多少毫秒内连续触发事件，不会执行
+ * @returns {Function}  返回包装之后的函数
  */
 export function __Debounce(method: Function, delay: number = 500): Function {
     let timer: number | null = null
@@ -39,9 +39,9 @@ export function __Debounce(method: Function, delay: number = 500): Function {
 
 /**
  * 节流函数
- * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} [delay = 500] - 间隔多少毫秒需要触发一次事件
- * @returns {Function} - 返回包装之后的函数
+ * @param method {Function}  事件触发的操作，传入的函数
+ * @param delay {Number} - [delay = 500]  间隔多少毫秒需要触发一次事件
+ * @returns {Function}  返回包装之后的函数
  */
 export function __Throttle(method: Function, delay: number = 500): Function {
     let timer: number
@@ -159,8 +159,8 @@ interface F {
 }
 /**
  * 本地持久化储存实体类
- * @param isLocal {boolean | object} 储存模式，当不为布尔值时，丢弃第二个参数，并且与实例化传入值无关
- * @param deep {boolean} 是否挂载为全局对象，仅在浏览器模式下并且 isLocal 为布尔值时生效。设置 true 时，实例为单例模式。如果确需重新构建，则调用 destroyed 方法后重新实例化
+ * @param isLocal {boolean | object} - [isLocal = false] 储存模式，当不为布尔值时，丢弃第二个参数，并且与实例化传入值无关
+ * @param deep {boolean} - [deep = true] 是否挂载为全局对象，仅在浏览器模式下并且 isLocal 为布尔值时生效。设置 true 时，实例为单例模式。如果确需重新构建，则调用 destroyed 方法后重新实例化
  * @returns Storage实例
  */
 
