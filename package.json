@@ -1,6 +1,6 @@
 {
     "name": "@jsmini/util-tools",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "自用工具类集合，不定期更新，欢迎提出issue",
     "main": "dist/index.js",
     "jsnext:main": "dist/index.esm.js",
@@ -24,7 +24,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "ssh://git@github.com:jsmini/util-tools.git"    
+        "url": "ssh://git@github.com:jsmini/util-tools.git"
     },
     "bugs": {
         "url": "https://github.com/jdeseva/@jsmini/util-tools/issues"

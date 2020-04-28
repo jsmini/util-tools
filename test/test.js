@@ -5,7 +5,7 @@ var sinon = require('sinon')
 
 var base = require('../src/index.ts')
 
-describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行测试才能完全通过', function() {
+describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行测试才能完全通过', function () {
     this.timeout(1000)
 
     let count = -1
@@ -50,7 +50,7 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
 
     describe('__Debounce', () => {
         var { __Debounce } = base
-        it('初始化值为 0 ', function() {
+        it('初始化值为 0 ', function () {
             expect(count).to.equal(0)
         })
         var fn = __Debounce(() => {
@@ -76,7 +76,7 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
 
     describe('__Throttle', () => {
         var { __Throttle } = base
-        it('初始化值为 0 ', function() {
+        it('初始化值为 0 ', function () {
             count = 0
             expect(count).to.equal(0)
         })

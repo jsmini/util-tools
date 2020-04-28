@@ -1,5 +1,5 @@
 /*!
- * @jsmini/util-tools 0.1.0 (https://github.com/jdeseva/@jsmini/util-tools)
+ * @jsmini/util-tools 0.1.1 (https://github.com/jdeseva/@jsmini/util-tools)
  * API https://github.com/jdeseva/@jsmini/util-tools/blob/master/doc/api.md
  * Copyright 2017-2020 jdeseva. All Rights Reserved
  * Licensed under MIT (https://github.com/jdeseva/@jsmini/util-tools/blob/master/LICENSE)
@@ -12,7 +12,7 @@
 }(this, (function (exports) { 'use strict';
 
     /**
-     * @author jsy七七
+     * @author jdeseva
      * @date 2019.10.24
      * @description 自用工具类函数，包含常用的自定义工具类函数，不定期整理更新。欢迎提出issue
      * @homePage https://github.com/jsmini/util-tools
@@ -187,7 +187,7 @@
         Storage.prototype.type = function (data) {
             if ((typeof data === 'number' && isNaN(data)) ||
                 typeof data === 'undefined') {
-                throw new Error('value is not avaliable');
+                console.error('value is not avaliable');
             }
             if (typeof data === 'number') {
                 if (data === Infinity || data === -Infinity)
@@ -257,7 +257,7 @@
             var keyList = Object.keys(this.methodType);
             if (typeof kv === 'string') {
                 if (keyList.indexOf(kv) === -1) {
-                    throw new Error('The value is not avaliable');
+                    console.error('The value is not avaliable');
                 }
                 return this.transformStringTo(this.methodType.getItem(kv));
             }
@@ -286,7 +286,7 @@
             var keyList = Object.keys(this.methodType);
             if (typeof kv === 'string') {
                 if (keyList.indexOf(kv) === -1) {
-                    throw new Error('The value is not avaliable');
+                    console.error('The value is not avaliable');
                 }
                 this.methodType.removeItem(kv);
             }

@@ -1,5 +1,5 @@
 /**
- * @author jsy七七
+ * @author jdeseva
  * @date 2019.10.24
  * @description 自用工具类函数，包含常用的自定义工具类函数，不定期整理更新。欢迎提出issue
  * @homePage https://github.com/jsmini/util-tools
@@ -14,7 +14,7 @@
  */
 export function __Once(method: Function): Function {
     let done = false
-    return function(): Function {
+    return function (): Function {
         return done ? undefined : ((done = true), method.apply(this, arguments))
     }
 }
@@ -27,11 +27,11 @@ export function __Once(method: Function): Function {
  */
 export function __Debounce(method: Function, delay: number = 500): Function {
     let timer: number | null = null
-    return function(): void {
+    return function (): void {
         let self = this
         let args = arguments
         timer && clearTimeout(timer)
-        timer = setTimeout(function(): void {
+        timer = setTimeout(function (): void {
             method.apply(self, args)
         }, delay)
     }
@@ -60,7 +60,7 @@ export function __Throttle(method: Function, delay: number = 500): Function {
             method.apply(self, args)
             start = now
         } else {
-            timer = setTimeout(function(): void {
+            timer = setTimeout(function (): void {
                 loop.apply(self, args)
             }, 50)
         }
@@ -215,7 +215,7 @@ export class Storage {
             (typeof data === 'number' && isNaN(data)) ||
             typeof data === 'undefined'
         ) {
-            throw new Error('value is not avaliable')
+            console.error('value is not avaliable')
         }
         if (typeof data === 'number') {
             if (data === Infinity || data === -Infinity) return 'Infinity'
@@ -283,7 +283,7 @@ export class Storage {
         let keyList = Object.keys(this.methodType)
         if (typeof kv === 'string') {
             if (keyList.indexOf(kv) === -1) {
-                throw new Error('The value is not avaliable')
+                console.error('The value is not avaliable')
             }
             return this.transformStringTo(this.methodType.getItem(kv))
         } else {
@@ -313,7 +313,7 @@ export class Storage {
         let keyList = Object.keys(this.methodType)
         if (typeof kv === 'string') {
             if (keyList.indexOf(kv) === -1) {
-                throw new Error('The value is not avaliable')
+                console.error('The value is not avaliable')
             }
             this.methodType.removeItem(kv)
         } else {
