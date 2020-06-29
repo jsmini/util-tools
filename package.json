@@ -6,7 +6,9 @@
     "jsnext:main": "dist/index.esm.js",
     "module": "dist/index.esm.js",
     "sideEffects": false,
-    "publishConfig": { "registry": "https://npm.pkg.github.com/@jsmini" },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/@jsmini"
+    },
     "scripts": {
         "clean": "rimraf ./dist",
         "test": "npm run lint && nyc mocha",
@@ -29,7 +31,10 @@
     "bugs": {
         "url": "https://github.com/jdeseva/@jsmini/util-tools/issues"
     },
-    "files": ["/dist", "*.d.ts"],
+    "files": [
+        "/dist",
+        "*.d.ts"
+    ],
     "engines": {
         "node": ">= 0.12.0"
     },
