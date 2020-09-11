@@ -103,55 +103,55 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@js-lib/cli@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@js-lib/cli/-/cli-1.5.1.tgz#1eb2756583259e7f24a3f3017ac84bafdc87f351"
-  integrity sha512-CSlmeJbXBXI3GFU1ZHnd3/cL+kpj6zcLdUS7zl1zvFi9ppVt49vbpopP/fYEDfONViil1SqLZwWZ5DSIEHFfFQ==
+"@js-lib/cli@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2fcli/-/cli-1.6.0.tgz#f3477cfc638d3b0da52d8fc8006a6294d7250a52"
+  integrity sha512-nEsEwRMG4wXXP+lG81XWPJ7D9+Kl9zZApNypUPDor+kE1F5XUz7OZjghMNtVz0xMhMh6aPuXKNYzu1R/epxRTw==
   dependencies:
-    "@js-lib/config" "^1.5.0"
-    "@js-lib/demo" "^1.5.0"
-    "@js-lib/eslint" "^1.5.0"
-    "@js-lib/license" "^1.5.0"
+    "@js-lib/config" "^1.6.0"
+    "@js-lib/demo" "^1.6.0"
+    "@js-lib/eslint" "^1.6.0"
+    "@js-lib/license" "^1.6.0"
     "@js-lib/manager" "^1.1.2"
-    "@js-lib/package" "^1.5.0"
-    "@js-lib/readme" "^1.5.0"
-    "@js-lib/rollup" "^1.5.1"
-    "@js-lib/root" "^1.5.0"
-    "@js-lib/src" "^1.5.0"
-    "@js-lib/test" "^1.5.0"
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/package" "^1.6.0"
+    "@js-lib/readme" "^1.6.0"
+    "@js-lib/rollup" "^1.6.0"
+    "@js-lib/root" "^1.6.0"
+    "@js-lib/src" "^1.6.0"
+    "@js-lib/test" "^1.6.0"
+    "@js-lib/util" "^1.6.0"
     inquirer "^7.0.0"
     ora "^3.4.0"
     validate-npm-package-name "^3.0.0"
     yargs "^14.0.0"
 
-"@js-lib/config@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/config/-/config-1.5.0.tgz#ca3f64b4cf2c9af2fe629f6446d912f67c596800"
-  integrity sha512-ZPRgWK4eXPS5wKoGNbZQk7u6iiQfNux92XEby8eaFilnYhhIvHsuvj9ACPenB7U63UybbOUG0lBnJMfJOMtFvQ==
+"@js-lib/config@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2fconfig/-/config-1.6.0.tgz#ed9e4cde41448a3b2307ad23487bc4001b599791"
+  integrity sha512-lJKuxoMHva7fr3Wki7AttSkd2gGIU6SOaZqLfCGiZ2Vfd3McLcsVdaIQMCyW7fVkcbiP6ao6JEzovnst2zZFCQ==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/demo@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/demo/-/demo-1.5.0.tgz#946fd7f32b5c528507e8ad9517717a24b79d13f6"
-  integrity sha512-IHZ2BQYF6BaXtnuMufG2t3wSaVsVYCLqvldo1wODnvtfyCRvzRMa2UlgXXFfuLfaO7QcatFao7YMMAHWt25HLg==
+"@js-lib/demo@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2fdemo/-/demo-1.6.0.tgz#bc66e95fc988a7f3a82172a2b9e7fc8b32601f78"
+  integrity sha512-xMqXbdwkkMufOQfTqmCrosFm9kgoGgCIh1I/HsUlL4oiLPC/MgaSldJrJdjWugAAF1Vp/KMaM1KYwqQbd5/qyg==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/eslint@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/eslint/-/eslint-1.5.0.tgz#0b8ac449fd6b9339e834252be970a7c1dbf56ae5"
-  integrity sha512-gkwS6FX9otnvJqwg96gx6ZO4/A8rRMEGYuzXdpvX2hG/BK060Ep1MyQRnN/t9ZT0KI9wMNV3wPJLFMGOk+PNmw==
+"@js-lib/eslint@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2feslint/-/eslint-1.6.0.tgz#64a09b783fe267f1c0eaa523d26ebb82ccc5892a"
+  integrity sha512-hARJGvncUxPzCWjtgCu5e3FiSRKrhL1LZJKWyVZ8zaVdMoUUf9r7bSqbZVzNYta7vTl0tMf8GPK/BlUc5Y2QLQ==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/license@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/license/-/license-1.5.0.tgz#4305c3e6e0cf7050722677d35c93c1bc3ba898da"
-  integrity sha512-tMDPTfA0busl8RNh3k/uId0vbQ1Ekk/6s4Lh4Yf7vx4DLNoJji/TsMvJvrpMHnVYMA24NkR66J45QF5a/BPXUg==
+"@js-lib/license@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2flicense/-/license-1.6.0.tgz#8786c0c92ac0222db32a5c354aca7473661dfe4e"
+  integrity sha512-s+JAaMbeKrs65cawtDptCBBO69TcHQnL1y18lnvY1D30CxtA+cw54BMEIZjtHRGpVfzqNaX6QHMee+iunOtSVA==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
 "@js-lib/manager@^1.1.2":
   version "1.1.2"
@@ -161,59 +161,59 @@
     chalk "^2.4.2"
     ora "^3.4.0"
 
-"@js-lib/package@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/package/-/package-1.5.0.tgz#db2ee39ad7b57639a593cf4131735c01972f4614"
-  integrity sha512-czYpdIgdC+y0uCg8Qy3oVz8OQcAu05+lQT3QX4bBiqxmtJfdonHP6ZtgwIdqNd0rk2oBG7LmjT40eFUYDe9P8g==
+"@js-lib/package@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2fpackage/-/package-1.6.0.tgz#8ed2d3238b66e23fb8dbb4845fa208c757232b6a"
+  integrity sha512-qzT9otGh04QeaYAbi3V9F8mqkMgjKOANOOfCLVHAecjzfhzPrSCRvO6r8kdeK4Tn+OMSPSf05imwNG2sjh+4zA==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/readme@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/readme/-/readme-1.5.0.tgz#f8b0e881b8b411e93133c3379bd67b275857ed96"
-  integrity sha512-oJOsLBsOmfNPXlc8AhxuJZgpVVsbHcFjmJD6ZHoud53hBybLJ6IDQ6UTx7plRFFAf5N676PldZQH2H62nSIvbA==
+"@js-lib/readme@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2freadme/-/readme-1.6.0.tgz#efd39548582ff92d898b67317ca5483e152c4e3d"
+  integrity sha512-/HFugeGnvRbtFtQjROdKYf4B8/e68WC3B2ICsyLAe2sEnZsBNFJRemyEw3Ry0HcaBB0sg0QqVU4P7OM7r2Gb1A==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/rollup@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@js-lib/rollup/-/rollup-1.5.1.tgz#6ba7aa99d96390c48edb6829b17a7b52a66c93b6"
-  integrity sha512-QOFuCr8fpvklSr8B9zPowXanHiuP/6lPQdsoaaChJD9QljZjhWqFfiwvTv13t+cZ29WtoD7hgtr3a8q6jwgBog==
+"@js-lib/rollup@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2frollup/-/rollup-1.6.0.tgz#dba574e0b189ca44f11e3a8b94c14c92e2a897b6"
+  integrity sha512-C5oTgMtz9RLYwEnRM3DQCFDMeuY9nJB1eHTh/ub36xiRT6XTcEK/xHZPT0E4r5VklXfJrks2DcrfjqNBM+303w==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/root@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/root/-/root-1.5.0.tgz#53d66e43ae306f24f643ccf6b0267e9f09a8df41"
-  integrity sha512-/X3U3vH9Mm6c1A+eoWlCY/DPI4wahtmmksvYbGDfGIyL4pCE7qDCx9ERbAxZBWs9MurXxHgXRK1SYfDgmoeguA==
+"@js-lib/root@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2froot/-/root-1.6.0.tgz#56d08330b427c2697a76388a2d9948e5171c2f1b"
+  integrity sha512-zhcs55zOH0IArrtDxjtP7x23h4FTtgaZlc80pC9N30NKWDjpUyytTD+ouT4lQlCcvzVxC6o5ECR1VUeU78MVmw==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/src@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/src/-/src-1.5.0.tgz#b5af92f0e2f0d9c0916f25a2abf976e834a08c0d"
-  integrity sha512-Y1cVT5XrzsdxZcT0L4xSfIXSyrb7ojkIReC9A+ZnTytPJcaCRCr2K4EQ4J6itr++6nThOR/Xu3W96rbAEDDZmQ==
+"@js-lib/src@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2fsrc/-/src-1.6.0.tgz#f47db2daf2fb7c6a77ebd4c8c0de0bcb56ab39e7"
+  integrity sha512-H4pouhVe9MQTFMgfRaW/N1lkksxe9mEGYg6gotJPh15dlXCgZKttBzK/x7HwkyA7qqyruP73o3DIO33hyg6kZw==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/test@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/test/-/test-1.5.0.tgz#a59494ac9d71f52ab5f61d95530b1ec35945103e"
-  integrity sha512-KUjOkPa8RLUwkxxwzgxk6MfOiBmlX2MJpW3WEzPzTNAaEiyFzoAHwSwA1w8taIqzTF7wKw+PlnKN5hR/z/zBNg==
+"@js-lib/test@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2ftest/-/test-1.6.0.tgz#32d27701d88c5b4f3bb013e1cc1d1d4290c32626"
+  integrity sha512-nKZnlK0Kq25ILeHYhlM77Y4/RlMXjZaqRdc6KrUZqg9WckySxhOmkqte/uQk/FxSrMW7rzkDAxgSG/e/45G18A==
   dependencies:
-    "@js-lib/util" "^1.5.0"
+    "@js-lib/util" "^1.6.0"
 
-"@js-lib/util@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@js-lib/util/-/util-1.5.0.tgz#224a9d8607c463b2176bbaa8fefc4abb7b1d26c5"
-  integrity sha512-M90tsgHpOSmy03S7KRXDi0VwxdLpFV9X5dSkQBetlX9mhl0g25DrqxbAL7pZDAxYq27ZEijEopwCwxuILrpF/Q==
+"@js-lib/util@^1.6.0":
+  version "1.6.0"
+  resolved "http://47.98.112.234:4873/@js-lib%2futil/-/util-1.6.0.tgz#2ec029f895b351438af8f6f0503bb7f16aa08899"
+  integrity sha512-0sHJCPJdvA2JxKjfj1wHN944PxrP+I+6SjU8mPmnInLhxVKtCgxiGUI7V043TABaPeDmPHi/k1SaYs78kzWG8g==
   dependencies:
     "@jsmini/extend" "^0.3.1"
     chalk "^2.4.2"
     copy-dir "^1.2.0"
-    template_js "0.8.0"
+    template_js "^2.4.0"
 
-"@jsmini/extend@^0.3.1":
+"@jsmini/extend@^0.3.1", "@jsmini/extend@^0.3.3":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@jsmini/extend/-/extend-0.3.3.tgz#464e97993dfb5621b10c084d7feca75a6b613102"
   integrity sha512-kR8IOP+cwS1f+RF/GFO4pzODqGtubE0XsqAoYDYsK6JGQ8YLsrGuY2ZolpjvwrzjR/vOpuaYpeS9RUfvowSJjA==
@@ -229,7 +229,7 @@
     "@babel/runtime" "^7.1.2"
     "@jsmini/type" "^0.9.1"
 
-"@jsmini/type@^0.9.1":
+"@jsmini/type@^0.9.1", "@jsmini/type@^0.9.2":
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/@jsmini/type/-/type-0.9.2.tgz#d3533957befdd4a24bf5ea7613fff453b58e2ff9"
   integrity sha512-fTsXi1wQQOfSy3KjowGIZE4rrr1U8RpsHG0m/4lxB0s7OD5ghX51PaRL/2heAGD4uDaJzeHYcW9aAwF/v5kUkg==
@@ -264,6 +264,24 @@
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
+
+"@templatejs/parser@^2.4.0":
+  version "2.4.0"
+  resolved "http://47.98.112.234:4873/@templatejs%2fparser/-/parser-2.4.0.tgz#7545e1079b38be6fb45817fcb3bfaec0c353c9f8"
+  integrity sha512-tcv2c7GcDudIF3NemwtO0LhIsFjWyv/NMUn9t2iWzGskbA12QWwck6ucHjsU4APHu2Cx92rqKVU0hMkzToqfsw==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    "@jsmini/extend" "^0.3.3"
+
+"@templatejs/runtime@^2.4.0":
+  version "2.4.0"
+  resolved "http://47.98.112.234:4873/@templatejs%2fruntime/-/runtime-2.4.0.tgz#30b42a44aa5627f404bbd9ddb1213d07404abf2c"
+  integrity sha512-fhnxE4BqOhmkYvNs5PRireRenZnxsfYQlWzNZX5Fb7muJM9+fehgoNOsgGmwYbCdB65lTlnypQKohDuQz365Lw==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    "@jsmini/extend" "^0.3.3"
+    "@jsmini/type" "^0.9.2"
+    "@templatejs/parser" "^2.4.0"
 
 "@types/acorn@^4.0.3":
   version "4.0.5"
@@ -846,6 +864,11 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+dom-walk@^0.1.0:
+  version "0.1.2"
+  resolved "http://47.98.112.234:4873/dom-walk/-/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
+  integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -1261,6 +1284,14 @@ glob@^7.0.5, glob@^7.1.2, glob@^7.1.3:
     minimatch "^3.0.4"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
+
+global@^4.4.0:
+  version "4.4.0"
+  resolved "http://47.98.112.234:4873/global/-/global-4.4.0.tgz#3e7b105179006a323ed71aafca3e9c57a5cc6406"
+  integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
+  dependencies:
+    min-document "^2.19.0"
+    process "^0.11.10"
 
 globals@^11.1.0, globals@^11.7.0:
   version "11.12.0"
@@ -1960,6 +1991,13 @@ mimic-fn@^2.1.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
 
+min-document@^2.19.0:
+  version "2.19.0"
+  resolved "http://47.98.112.234:4873/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
+  integrity sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
+  dependencies:
+    dom-walk "^0.1.0"
+
 minimatch@^3.0.2, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -2358,6 +2396,11 @@ pretty-ms@^3.1.0:
   integrity sha512-ZypexbfVUGTFxb0v+m1bUyy92DHe5SyYlnyY0msyms5zd3RwyvNgyxZZsXXgoyzlxjx5MiqtXUdhUfvQbe0A2Q==
   dependencies:
     parse-ms "^1.0.0"
+
+process@^0.11.10:
+  version "0.11.10"
+  resolved "http://47.98.112.234:4873/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
+  integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
 
 progress@^2.0.0:
   version "2.0.3"
@@ -2919,10 +2962,16 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-template_js@0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/template_js/-/template_js-0.8.0.tgz#3ac35c91c46e11565215203d28fb6c3985caa05e"
-  integrity sha512-6h3rn0vKcZYiaC+BUqKtjQGxbL5KMTwQKZZKBjlvHtwOS7q2LKydFU0xN6DlmZoDspJgitQV+i2zgy8Ye/JPAw==
+template_js@^2.4.0:
+  version "2.4.0"
+  resolved "http://47.98.112.234:4873/template_js/-/template_js-2.4.0.tgz#891cd721fab1ce7fd94454e00ffedcf06b075652"
+  integrity sha512-v/+rdh0HSkFGG+BpFMGnYIQd6F5+m+kB3EQrcmvAzVIP43nbAlpuY5Dgrb9jA0csvzfczEqFkLEOrtzw23mo8Q==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    "@jsmini/extend" "^0.3.3"
+    "@jsmini/type" "^0.9.2"
+    "@templatejs/parser" "^2.4.0"
+    "@templatejs/runtime" "^2.4.0"
 
 test-exclude@^5.0.0:
   version "5.2.3"

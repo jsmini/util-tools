@@ -250,7 +250,7 @@ export class Storage {
      * @returns 返回原始数据
      */
     private transformStringTo(value: string): mixins {
-        let data: { type: string; value: mixins } = JSON.parse(value)
+        let data: { type: string; value: mixins } = JSON.parse(value || '{}')
         if (data.type === 'Infinity') {
             return Number(data.value)
         } else {
@@ -280,11 +280,7 @@ export class Storage {
      * @returns 返回储存的数据
      */
     protected get(kv: string | string[]): mixins {
-        let keyList = Object.keys(this.methodType)
         if (typeof kv === 'string') {
-            if (keyList.indexOf(kv) === -1) {
-                console.error('The value is not avaliable')
-            }
             return this.transformStringTo(this.methodType.getItem(kv))
         } else {
             let result = {}
@@ -310,11 +306,7 @@ export class Storage {
      * @returns void
      */
     protected remove(kv: string | string[]): void {
-        let keyList = Object.keys(this.methodType)
         if (typeof kv === 'string') {
-            if (keyList.indexOf(kv) === -1) {
-                console.error('The value is not avaliable')
-            }
             this.methodType.removeItem(kv)
         } else {
             for (let i = 0; i < kv.length; i++) {

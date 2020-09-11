@@ -222,7 +222,7 @@ var Storage = /** @class */ (function () {
      * @returns 返回原始数据
      */
     Storage.prototype.transformStringTo = function (value) {
-        var data = JSON.parse(value);
+        var data = JSON.parse(value || '{}');
         if (data.type === 'Infinity') {
             return Number(data.value);
         }
@@ -252,11 +252,7 @@ var Storage = /** @class */ (function () {
      * @returns 返回储存的数据
      */
     Storage.prototype.get = function (kv) {
-        var keyList = Object.keys(this.methodType);
         if (typeof kv === 'string') {
-            if (keyList.indexOf(kv) === -1) {
-                console.error('The value is not avaliable');
-            }
             return this.transformStringTo(this.methodType.getItem(kv));
         }
         else {
@@ -281,11 +277,7 @@ var Storage = /** @class */ (function () {
      * @returns void
      */
     Storage.prototype.remove = function (kv) {
-        var keyList = Object.keys(this.methodType);
         if (typeof kv === 'string') {
-            if (keyList.indexOf(kv) === -1) {
-                console.error('The value is not avaliable');
-            }
             this.methodType.removeItem(kv);
         }
         else {
