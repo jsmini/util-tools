@@ -201,8 +201,9 @@ export class Storage {
         if (typeof this.isLocal === 'boolean') {
             if (!this.isLocal) return sessionStorage
             return localStorage
+        } else {
+            return sessionStorage // AsyncStorage
         }
-        return sessionStorage // AsyncStorage
     }
 
     /**

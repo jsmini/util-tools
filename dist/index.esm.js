@@ -1,5 +1,5 @@
 /*!
- * @jsmini/util-tools 0.1.1 (https://github.com/jdeseva/@jsmini/util-tools)
+ * @jsmini/util-tools 0.1.3 (https://github.com/jdeseva/@jsmini/util-tools)
  * API https://github.com/jdeseva/@jsmini/util-tools/blob/master/doc/api.md
  * Copyright 2017-2020 jdeseva. All Rights Reserved
  * Licensed under MIT (https://github.com/jdeseva/@jsmini/util-tools/blob/master/LICENSE)
@@ -171,7 +171,9 @@ var Storage = /** @class */ (function () {
                 return sessionStorage;
             return localStorage;
         }
-        return sessionStorage; // AsyncStorage
+        else {
+            return sessionStorage; // AsyncStorage
+        }
     };
     /**
      * 检测数据类型
