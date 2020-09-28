@@ -1,5 +1,5 @@
 /*!
- * @jsmini/util-tools 0.1.3 (https://github.com/jdeseva/@jsmini/util-tools)
+ * @jsmini/util-tools 0.1.4 (https://github.com/jdeseva/@jsmini/util-tools)
  * API https://github.com/jdeseva/@jsmini/util-tools/blob/master/doc/api.md
  * Copyright 2017-2020 jdeseva. All Rights Reserved
  * Licensed under MIT (https://github.com/jdeseva/@jsmini/util-tools/blob/master/LICENSE)
