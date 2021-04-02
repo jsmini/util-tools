@@ -7,21 +7,27 @@
 
 /** ******************************************************** */
 
+
+
+type M = string | number | boolean | object | string[] | number[] | boolean[] | object[]
+
+interface dataObject {
+    K: string;
+    V: M;
+}
+
+
 /**
  * 本地持久化储存实体类
- * @param isLocal {boolean} - false 储存模式
  * @param isSingleInstance {boolean} - true 是否单例模式
  * @returns `Storage` 实例
  */
 export class Storage {
-    private isLocal: boolean
     private isSingleInstance: boolean
 
     private constructor(
-        isLocal: boolean = false,
         isSingleInstance: boolean = true
     ) {
-        this.isLocal = isLocal
         this.isSingleInstance = isSingleInstance
         this.isSingleInstance && this.singleInstance()
     }
@@ -50,13 +56,12 @@ export class Storage {
     }
 
     /**
-     * 将数据进行一次清洗，归一化后转化为字符串形式存入 `Storage` 中
+     * 将数据进行一次清洗，进行归一化操作
      * @param data
      * @returns
      */
-    private transfromDataToInstance<T>(data: T): string {
-        const result = { type: this.checkType(data), data }
-        return JSON.stringify(result)
+    private transfromDataToInstance<T>(data: T): object {
+        return { type: this.checkType(data), data }
     }
 
 
@@ -85,8 +90,15 @@ export class Storage {
      * @param delay 储存数据的有效时间，单位：秒 为0 或者不传代表永久有效（在 `localStorage` 模式下）
      * @param method 储存方法 默认 `sessionStorage` 当该值为 `true` 代表 `localStorage`
      */
-    protected set<T>(ref: string | object, value?: T, delay?: number = 0, method?: undefined | boolean = undefined): void {
-        this.transfromDataToInstance(value)
+    protected set<T>(ref: string | dataObject, value?: T, delay?: number, method?: undefined | boolean): void {
+        const refType = this.checkType(ref)
+        const Method = method ? localStorage : sessionStorage
+        if(refType === 'String') {
+            const result = {...this.transfromDataToInstance(value), setTime: Date.now(), delay, overTime: Date.now() + delay * 1000}
+            Method.setItem(ref as string, JSON.stringify(result))
+        } else{
+
+        }
     }
 
     /**
