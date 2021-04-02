@@ -13,13 +13,13 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
     const list = [
         { id: 0, name: '第一层', pid: -1 },
         { id: 1, name: '第二层', pid: 0 },
-        { id: 2, name: '第三层', pid: 1 }
+        { id: 2, name: '第三层', pid: 1 },
     ]
 
     const map = {
         Vue: 'version --alpha-next',
         React: 'hook 16.8',
-        Angular: 'I do'
+        Angular: 'I do',
     }
 
     let List = []
@@ -56,7 +56,7 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
         var fn = __Debounce(() => {
             count = count + 1
         }, 50)
-        it('短时间重复执行3遍，结果应该为 0', async done => {
+        it('短时间重复执行3遍，结果应该为 0', async (done) => {
             fn()
             fn()
             fn()
