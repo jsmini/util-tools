@@ -6,7 +6,7 @@
         "declaration": true,
         "declarationDir": "./dist",
         "lib": ["dom", "es6", "es7"],
-        "removeComments": true
+        "removeComments": false
     },
     "include": ["src/*.ts"],
     "exclude": ["node_modules", "**.d.ts"]
