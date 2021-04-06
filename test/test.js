@@ -171,14 +171,10 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
                 }
             })
             it('复合属性', () => {
-                St.set({ str: str, inf: inf, number: number })
+                St.set({ str, inf, number })
                 var res = St.get(['str', 'inf', 'number'])
-                var kv = Object.values(res)
-                let flag = false
-                flag =
-                    kv.indexOf(str) > -1 &&
-                    kv.indexOf(inf) > -1 &&
-                    kv.indexOf(number) > -1
+                console.log(res)
+                const flag = res.str === str && res.inf === inf && res.number === number
                 expect(flag).to.be(true)
             })
             it('set - 单值模式', () => {
@@ -203,33 +199,24 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
             })
             it('getAll', () => {
                 var getValue = St.getAll()
-                var getkeyList = Object.keys(getValue)
-                var kL = Object.keys(St.methodType)
-                var isExit = true
-                for (let i = 0; i < getkeyList.length; i++) {
-                    if (kL.indexOf(getkeyList[i]) > -1) {
-                        isExit = false
-                        break
-                    }
-                }
-                expect(isExit).to.be(false)
+                const total = Object.keys(St.store.L).length + Object.keys(St.store.S).length
+                expect(Object.keys(getValue).length).to.equal(total)
             })
             it('remove - 单值模式', () => {
                 St.remove('demo1')
-                var isValue = St.methodType.getItem('demo1')
-                expect(isValue).to.be(null)
+                var isValue = St.get('demo1')
+                expect(isValue).to.be(undefined)
             })
             it('remove - 多值模式', () => {
                 St.remove(['value', 'name'])
-                var isValue =
-                    St.methodType.getItem('value') &&
-                    St.methodType.getItem('name')
-                expect(isValue).to.be(null)
+                const value1 = St.get('value')
+                const value2 = St.get('name')
+                expect(value1 === value2 && typeof value1 === 'undefined').to.be(true)
             })
             it('removeAll', () => {
                 St.removeAll()
-                var k = Object.keys(St.methodType)
-                expect(k).to.length(0)
+                const total = Object.keys(St.store.L).length + Object.keys(St.store.S).length
+                expect(total).to.equal(0)
             })
             it('destroyed', () => {
                 St.destroyed()
