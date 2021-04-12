@@ -1,6 +1,15 @@
 var expect = require('expect.js')
 var sinon = require('sinon')
 
+const { JSDOM } = require('jsdom')
+
+const { window } = new JSDOM()
+
+const Storage = require('dom-storage')
+global.localStorage = new Storage(null, { strict: true })
+global.sessionStorage = new Storage(null, { strict: true })
+global.window = window
+
 // ts 测试编译后文件
 
 var base = require('../src/index.ts')
@@ -173,7 +182,6 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
             it('复合属性', () => {
                 St.set({ str, inf, number })
                 var res = St.get(['str', 'inf', 'number'])
-                console.log(res)
                 const flag = res.str === str && res.inf === inf && res.number === number
                 expect(flag).to.be(true)
             })
@@ -218,6 +226,14 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
                 const total = Object.keys(St.store.L).length + Object.keys(St.store.S).length
                 expect(total).to.equal(0)
             })
+
+            // it('页面刷新', () => {
+            //     St.set('deep', 123, 10)
+            //     // window.location.reload()
+            //     const res = St.get('deep')
+            //     expect(res).to.equal(123)
+            // })
+
             it('destroyed', () => {
                 St.destroyed()
                 var k = window['$Storage']

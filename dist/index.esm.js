@@ -171,7 +171,7 @@ var __assign = function() {
  * @param isSingleInstance {boolean} - true 是否单例模式
  * @returns `Storage` 实例
  */
-var Storage$1 = /** @class */ (function () {
+var Storage = /** @class */ (function () {
     function Storage(isSingleInstance) {
         if (isSingleInstance === void 0) { isSingleInstance = true; }
         this.isSingleInstance = isSingleInstance;
@@ -180,7 +180,6 @@ var Storage$1 = /** @class */ (function () {
             S: JSON.parse(sessionStorage.getItem('store') || '{}'),
         };
         // this.addListenerToState()
-        console.log(this.store);
         return this.singleInstance();
     }
     /**
@@ -203,11 +202,13 @@ var Storage$1 = /** @class */ (function () {
         Object.defineProperty(this.store, 'S', {
             enumerable: true,
             configurable: false,
+            writable: true,
             set: function (value) {
-                console.log('set', this, value);
-                // this.store = value
+                console.log(111, value, this.store);
+                this.store = value;
             },
             get: function () {
+                console.log(222, this.store);
                 return this.store;
             }
         });
@@ -316,4 +317,4 @@ var Storage$1 = /** @class */ (function () {
     return Storage;
 }());
 
-export { __ArrayToMap, __Debounce, __MapToArray, __Once, __Throttle, __ToTree, Storage$1 as Storage };
+export { __ArrayToMap, __Debounce, __MapToArray, __Once, __Throttle, __ToTree, Storage };

@@ -7,15 +7,7 @@
 
 /** ******************************************************** */
 
-type M =
-    | string
-    | number
-    | boolean
-    | object
-    | string[]
-    | number[]
-    | boolean[]
-    | object[]
+type M = string | number | boolean | object | string[] | number[] | boolean[] | object[]
 
 /**
  * 本地持久化储存实体类
@@ -33,7 +25,6 @@ export class Storage {
             S: JSON.parse(sessionStorage.getItem('store') || '{}'), // sessionStorage
         }
         // this.addListenerToState()
-        console.log(this.store)
         return this.singleInstance()
     }
 
@@ -58,11 +49,13 @@ export class Storage {
         Object.defineProperty(this.store, 'S', {
             enumerable: true,
             configurable: false,
+            writable: true,
             set<T>(value: T): void {
-                console.log('set', this, value)
-                // this.store = value
+                console.log(111, value, this.store)
+                this.store = value
             },
             get<T>(): T {
+                console.log(222, this.store)
                 return this.store
             }
         })
@@ -87,7 +80,7 @@ export class Storage {
      * @param data
      * @returns
      */
-    private transfromDataToInstance<T>(data: T): object {
+    private transfromDataToInstance(data: M): Record<string, M> {
         return { type: this.checkType(data), data }
     }
 
@@ -102,7 +95,7 @@ export class Storage {
         if (typeof key === 'string') {
             return (Target[key] || {}).data // 直接返回结果
         } else {
-            return (key as string[]).reduce((pre: T | object, cur: string): T | object => {
+            return (key as string[]).reduce((pre: T | object, cur: string): T | M => {
                 return { ...pre, [cur]: (Target[cur] || {}).data }
             }, {})
         }
@@ -127,14 +120,14 @@ export class Storage {
      */
     protected set<T>(
         ref: string | Record<string, T>,
-        value?: T,
+        value?: M,
         delay?: number,
         target?: undefined
     ): void {
         const refType = this.checkType(ref)
         const Target = target ? this.store.L : this.store.S
         if (refType === 'String') {
-            let result: T | object = this.transfromDataToInstance(value)
+            let result: Record<string, M> = this.transfromDataToInstance(value)
             if (target && delay) {
                 result = {
                     ...this.transfromDataToInstance(value),
