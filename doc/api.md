@@ -1,25 +1,26 @@
 # 文档
-这是一个自用工具类函数库，目前只有下列功能，会不定期更新，欢迎issue
 
-## api模版
+这是一个自用工具类函数库，目前只有下列功能，会不定期更新，欢迎 issue
+
+## api 模版
 
 **方法列表**
 
-- `__Once` : 单次执行，页面加载后只能执行一次
-- `__Debounce` : 防抖函数
-- `__Throttle` : 节流函数
-- `__ToTree` : 构建树
-- `__MapToArray` : 映射数组
-- `__ArrayToMap` : 映射map字典
-- `Storage` : 本地储存类
+-   `__Once` : 单次执行，页面加载后只能执行一次
+-   `__Debounce` : 防抖函数
+-   `__Throttle` : 节流函数
+-   `__ToTree` : 构建树
+-   `__MapToArray` : 映射数组
+-   `__ArrayToMap` : 映射 map 字典
+-   `Storage` : 本地储存类
 
 **函数参数和返回值(根据代码提示即可)**
 
-#### __Once
+#### \_\_Once
 
- * 单次执行函数，页面加载后只能执行一次
- * @param method {Function} 传入的函数
- * @returns {Function} 返回函数
+-   单次执行函数，页面加载后只能执行一次
+-   @param method {Function} 传入的函数
+-   @returns {Function} 返回函数
 
 **代码用例**
 
@@ -41,13 +42,13 @@ Fn()
 console.log(a) // 1
 ```
 
-#### __Debounce
+#### \_\_Debounce
 
- * 防抖函数
- * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} [delay = 500] - 多少毫秒内连续触发事件，不会执行
- * @returns {Function} - 返回包装之后的函数
- 
+-   防抖函数
+-   @param {Function} method 事件触发的操作，传入的函数
+-   @param {Number} [delay = 500] - 多少毫秒内连续触发事件，不会执行
+-   @returns {Function} - 返回包装之后的函数
+
 **代码用例**
 
 ```js
@@ -68,12 +69,12 @@ setTimeout(() => {
 }, 1000)
 ```
 
-#### __Throttle
+#### \_\_Throttle
 
- * 节流函数
- * @param {Function} method 事件触发的操作，传入的函数
- * @param {Number} [delay = 500] - 间隔多少毫秒需要触发一次事件
- * @returns {Function} - 返回包装之后的函数
+-   节流函数
+-   @param {Function} method 事件触发的操作，传入的函数
+-   @param {Number} [delay = 500] - 间隔多少毫秒需要触发一次事件
+-   @returns {Function} - 返回包装之后的函数
 
 **代码用例**
 
@@ -96,13 +97,13 @@ setTimeout(() => {
 }, 2000)
 ```
 
-#### __ToTree
+#### \_\_ToTree
 
- * 将List结构的对象数组转化为树形结构
- * @param data {Array<object>} 源数据
- * @param parentIdKey {string} 关联节点名称
- * @param idKey {string} 主键
- * @returns {Array<object>} 返回的树形结构数据
+-   将 List 结构的对象数组转化为树形结构
+-   @param data {Array<object>} 源数据
+-   @param parentIdKey {string} 关联节点名称
+-   @param idKey {string} 主键
+-   @returns {Array<object>} 返回的树形结构数据
 
 **代码用例**
 
@@ -126,17 +127,17 @@ console.log(tree)
  *         }]
  *     }]
  * }]
- * 
+ *
  * /
 ```
 
-#### __MapToArray
+#### \_\_MapToArray
 
- * 将map字典对象转化为List
- * @param {Object} map Map对象
- * @param {String} [key = name] 键名
- * @param {String} [val = value] 键值
- * @returns {Array<Object>} 返回数组
+-   将 map 字典对象转化为 List
+-   @param {Object} map Map 对象
+-   @param {String} [key = name] 键名
+-   @param {String} [val = value] 键值
+-   @returns {Array<Object>} 返回数组
 
 **代码用例**
 
@@ -146,7 +147,7 @@ import { __MapToArray } from '@jsmini/util-tools'
 var map = {
     Vue: 'version --alpha-next',
     React: 'hook 16.8',
-    Angular: 'I do'
+    Angular: 'I do',
 }
 
 var list = __MapToArray(map)
@@ -154,24 +155,28 @@ var list = __MapToArray(map)
 console.log(list) // [{"name":"Vue","value":"version --alpha-next"},{"name":"React","value":"hook 16.8"},{"name":"Angular","value":"I do"}]
 ```
 
-#### __ArrayToMap
+#### \_\_ArrayToMap
 
- * 将数组转化为字典对象类型
- * @param {Array} array 数据
- * @param {String} [key = name] 键名
- * @param {String} [val = value] 键值
- * @returns {Object} 返回map对象字典
+-   将数组转化为字典对象类型
+-   @param {Array} array 数据
+-   @param {String} [key = name] 键名
+-   @param {String} [val = value] 键值
+-   @returns {Object} 返回 map 对象字典
 
 **代码用例**
 
 ```js
 import { __MapToArray } from '@jsmini/util-tools'
 
-var list = [{"name":"Vue","value":"version --alpha-next"},{"name":"React","value":"hook 16.8"},{"name":"Angular","value":"I do"}]
+var list = [
+    { name: 'Vue', value: 'version --alpha-next' },
+    { name: 'React', value: 'hook 16.8' },
+    { name: 'Angular', value: 'I do' },
+]
 
 var map = __MapToArray(map)
 
-console.log(map) 
+console.log(map)
 /*
 {
     Vue: 'version --alpha-next',
@@ -183,10 +188,9 @@ console.log(map)
 
 #### Storage
 
-* 本地持久化储存实体类
- * @param isLocal {boolean | object} 储存模式，当不为布尔值时，丢弃第二个参数，并且与实例化传入值无关
- * @param deep {boolean} 是否挂载为全局对象，仅在浏览器模式下并且 isLocal 为布尔值时生效。设置 true 时，实例为单例模式。如果确需重新构建，则调用 destroyed 方法后重新实例化
- * @returns Storage实例
+-   本地持久化储存实体类
+-   @param isSingleInstance {boolean} - true 是否单例模式
+-   @returns Storage 实例
 
 **代码用例**
 
@@ -199,7 +203,7 @@ console.log(St === new Storage()) // true
 
 var a = true
 
-var c = {name: 123, value: 'test'}
+var c = { name: 123, value: 'test' }
 
 St.set('a', a) // 单值模式
 
@@ -222,4 +226,4 @@ St.destroyed() // 销毁当前实例
 
 **特殊说明**
 
-`Storage` 本地储存类不支持`Node`环境。后续会新增`React-Native`支持。
+`Storage` 本地储存类支持`Node`环境，但是需要添加第三方库以支持 Storage

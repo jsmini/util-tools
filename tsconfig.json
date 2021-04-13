@@ -4,7 +4,9 @@
         "target": "ES5",
         "module": "commonjs",
         "declaration": true,
-        "declarationDir": "./dist"
+        "declarationDir": "./dist",
+        "lib": ["dom", "es6", "es7"],
+        "removeComments": false
     },
     "include": ["src/*.ts"],
     "exclude": ["node_modules", "**.d.ts"]

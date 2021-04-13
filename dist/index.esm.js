@@ -1,7 +1,7 @@
 /*!
  * @jsmini/util-tools 0.1.4 (https://github.com/jdeseva/@jsmini/util-tools)
  * API https://github.com/jdeseva/@jsmini/util-tools/blob/master/doc/api.md
- * Copyright 2017-2020 jdeseva. All Rights Reserved
+ * Copyright 2017-2021 jdeseva. All Rights Reserved
  * Licensed under MIT (https://github.com/jdeseva/@jsmini/util-tools/blob/master/LICENSE)
  */
 
@@ -133,27 +133,57 @@ function __ArrayToMap(array, key, val) {
     });
     return res;
 }
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+/**
+ * @author jdeseva
+ * @date 2021.04.13
+ * @description 本地存储类 v2
+ * @homePage https://github.com/jsmini/util-tools
+ */
 /**
  * 本地持久化储存实体类
- * @param isLocal {boolean | object} - [isLocal = false] 储存模式，当不为布尔值时，丢弃第二个参数，并且与实例化传入值无关
- * @param deep {boolean} - [deep = true] 是否挂载为全局对象，仅在浏览器模式下并且 isLocal 为布尔值时生效。设置 true 时，实例为单例模式。如果确需重新构建，则调用 destroyed 方法后重新实例化
- * @returns Storage实例
+ * @param isSingleInstance {boolean} - true 是否单例模式
+ * @returns `Storage` 实例
  */
 var Storage = /** @class */ (function () {
-    function Storage(isLocal, deep) {
-        if (isLocal === void 0) { isLocal = false; }
-        if (deep === void 0) { deep = true; }
-        this.isLocal = isLocal;
-        this.deep = deep;
-        this.methodType = this.method();
+    function Storage(isSingleInstance) {
+        if (isSingleInstance === void 0) { isSingleInstance = true; }
+        this.isSingleInstance = isSingleInstance;
+        this.store = this.addListenerToState(JSON.parse(sessionStorage.getItem('store') || '{}'), JSON.parse(localStorage.getItem('store') || '{}'));
         return this.singleInstance();
     }
     /**
      * 单例模式
-     * @returns Storage
+     * @returns `Storage` 实例
      */
     Storage.prototype.singleInstance = function () {
-        if (window && this.deep && typeof this.isLocal === 'boolean') {
+        if (window && this.isSingleInstance) {
             if (!window['$Storage']) {
                 window['$Storage'] = this;
             }
@@ -162,145 +192,149 @@ var Storage = /** @class */ (function () {
         return this;
     };
     /**
-     * 获取当前实例应用的方法
-     * @returns Storage
+     * 添加状态监听器
      */
-    Storage.prototype.method = function () {
-        if (typeof this.isLocal === 'boolean') {
-            if (!this.isLocal)
-                return sessionStorage;
-            return localStorage;
-        }
-        else {
-            return sessionStorage; // AsyncStorage
-        }
+    Storage.prototype.addListenerToState = function (session, local) {
+        var _this = this;
+        var L = new Proxy(local, {
+            get: function (target, key) {
+                _this.checkTimeout(local);
+                return target[key];
+            },
+            set: function (target, key, value) {
+                target[key] = value;
+                localStorage.setItem('store', JSON.stringify(target));
+                return true;
+            }
+        });
+        var S = new Proxy(session, {
+            get: function (target, key) {
+                _this.checkTimeout(session);
+                return target[key];
+            },
+            set: function (target, key, value) {
+                target[key] = value;
+                sessionStorage.setItem('store', JSON.stringify(target));
+                return true;
+            }
+        });
+        return { L: L, S: S };
+    };
+    /**
+     * 检查储存的数据是否超时
+     */
+    Storage.prototype.checkTimeout = function (ref) {
+        Object.keys(ref).map(function (p) {
+            if (ref[p].hasOwnProperty('delay')) {
+                if (Date.now() >= ref[p].overTime) {
+                    Reflect.deleteProperty(ref, p);
+                }
+            }
+        });
+        return ref;
     };
     /**
      * 检测数据类型
-     * @param data {any} 数据源
-     * @returns 返回数据类型
+     * @param data 数据类型
+     * @returns 数据类型
      */
-    Storage.prototype.type = function (data) {
-        if ((typeof data === 'number' && isNaN(data)) ||
-            typeof data === 'undefined') {
-            console.error('value is not avaliable');
-        }
-        if (typeof data === 'number') {
-            if (data === Infinity || data === -Infinity)
-                return 'Infinity';
-            return 'number';
-        }
-        else if (typeof data === 'object' || typeof data === 'boolean') {
-            /** 因为对象类型和布尔类型经过 JSON.parse 之后会还原，故此统一处理 | 暂时不支持存储 Set 和 Map 类型*/
-            return 'mixins';
+    Storage.prototype.checkType = function (data) {
+        return Object.prototype.toString.call(data).slice(8, -1);
+    };
+    /**
+     * 将数据进行一次清洗，进行归一化操作
+     * @param data
+     * @returns
+     */
+    Storage.prototype.transfromDataToInstance = function (data) {
+        return { type: this.checkType(data), data: data };
+    };
+    /**
+     * 获取 `Storage` 中储存的数据，若不存在 那么会返回 null
+     * @param key 需要查找的数据的 key 可以传入一个数组代表查找多个
+     * @param target 储存方法 默认 `sessionStorage` 当该值为 `true` 代表 `localStorage`（类型转换后为`true`也算）
+     * @returns data
+     */
+    Storage.prototype.get = function (key, target) {
+        var Target = target ? this.store.L : this.store.S;
+        if (typeof key === 'string') {
+            return (Target[key] || {}).data; // 直接返回结果
         }
         else {
-            return 'string';
+            return key.reduce(function (pre, cur) {
+                var _a;
+                return __assign({}, pre, (_a = {}, _a[cur] = (Target[cur] || {}).data, _a));
+            }, {});
         }
     };
     /**
-     * 数据类型转换
-     * @param {any} data 数据源
-     * @returns {string} 转化为字符串的数据格式
-     */
-    Storage.prototype.transformToString = function (data) {
-        var type = this.type(data);
-        var result = {};
-        if (type === 'Infinity') {
-            result = { type: type, value: String(data) };
-        }
-        else {
-            result = { type: type, value: data };
-        }
-        return JSON.stringify(result);
-    };
-    /**
-     * 将字符串数据转化为原始数据
-     * @param value {string} 字符串数据
-     * @returns 返回原始数据
-     */
-    Storage.prototype.transformStringTo = function (value) {
-        var data = JSON.parse(value || '{}');
-        if (data.type === 'Infinity') {
-            return Number(data.value);
-        }
-        else {
-            return data.value;
-        }
-    };
-    /**
-     * 设置储存数据，可以设置多个，以对象形式传入
-     * @param kv {string | object} 键值，传入对象时代表数据源，对象键值默认为键值
-     * @param value {any} 数据源，当 kv 为对象时将丢弃此参数
-     * @returns void
-     */
-    Storage.prototype.set = function (kv, value) {
-        if (typeof kv === 'string') {
-            this.methodType.setItem(kv, this.transformToString(value));
-        }
-        else {
-            for (var k in kv) {
-                this.set(k, kv[k]);
-            }
-        }
-    };
-    /**
-     * 获取储存的数据，可以获取多个
-     * @param kv {string | Array<string>} 键名，可以传入多个
-     * @returns 返回储存的数据
-     */
-    Storage.prototype.get = function (kv) {
-        if (typeof kv === 'string') {
-            return this.transformStringTo(this.methodType.getItem(kv));
-        }
-        else {
-            var result = {};
-            for (var i = 0; i < kv.length; i++) {
-                result[kv[i]] = this.get(kv[i]);
-            }
-            return result;
-        }
-    };
-    /**
-     * 获取全部储存的数据
-     * @returns 返回储存数据所组成的对象
+     * 获取 `Storage` 中存储的所有的数据
+     * @param target 储存方法 默认 `sessionStorage` 当该值为 `true` 代表 `localStorage`（类型转换后为`true`也算）
+     * @returns data
      */
     Storage.prototype.getAll = function () {
-        var keyList = Object.keys(this.methodType);
-        return this.get(keyList);
+        return this.get(Object.keys(this.store.L).concat(Object.keys(this.store.S)));
     };
     /**
-     * 删除储存的数据，可以删除多个
-     * @param kv {string | Array<string>} 键名，可以传入多个
-     * @returns void
+     * 储存数据
+     * @param ref key键名 或者 key-value 所组成的键值对对象，如果是 key-value 对象 那么第二个参数会被丢弃
+     * @param value value 数据 当 `ref` 为key-value 对象 那么这个值会被丢弃
+     * @param delay 储存数据的有效时间，单位：秒 为0 或者不传代表永久有效（在 `localStorage` 模式下）
+     * @param target 储存方法 默认 `sessionStorage` 当该值为 `true` 代表 `localStorage`（类型转换后为`true`也算）
      */
-    Storage.prototype.remove = function (kv) {
-        if (typeof kv === 'string') {
-            this.methodType.removeItem(kv);
+    Storage.prototype.set = function (ref, value, delay, target) {
+        var _this_1 = this;
+        var refType = this.checkType(ref);
+        var Target = target ? this.store.L : this.store.S;
+        if (refType === 'String') {
+            var result = this.transfromDataToInstance(value);
+            if (target && delay) {
+                result = __assign({}, this.transfromDataToInstance(value), { setTime: Date.now(), delay: delay, overTime: Date.now() + delay * 1000 });
+            }
+            Target[ref] = result;
         }
         else {
-            for (var i = 0; i < kv.length; i++) {
-                this.remove(kv[i]);
-            }
+            Object.keys(ref).forEach(function (p) {
+                return _this_1.set(p, ref[p]);
+            });
+        }
+        sessionStorage.setItem('store', JSON.stringify(this.store.S));
+        localStorage.setItem('store', JSON.stringify(this.store.L));
+    };
+    /**
+     * 删除 `Storage` 中的数据，可以通过传入数组删除多个
+     * @param ref 数组的键名，为数组时代表删除多个
+     * @param target 目标，默认 `undefined`，代表 `sessionStorage`, 为 `true` 时代表 `localStorage`（类型转换后为`true`也算）
+     */
+    Storage.prototype.remove = function (ref, target) {
+        var _this_1 = this;
+        var refType = this.checkType(ref);
+        var Target = target ? this.store.L : this.store.S;
+        if (refType === 'String') {
+            Reflect.deleteProperty(Target, ref);
+        }
+        else {
+            ref.forEach(function (p) { return _this_1.remove(p); });
         }
     };
     /**
-     * 删除所有数据
-     * @returns void
+     * 删除 `Storage` 中所有的数据
      */
     Storage.prototype.removeAll = function () {
-        this.methodType.clear();
+        sessionStorage.removeItem('store');
+        localStorage.removeItem('store');
+        this.store = {
+            L: {},
+            S: {},
+        };
     };
     /**
-     * 销毁当前全局实例，仅在单例模式下生效
-     * @returns void
+     * 销毁 `Storage` 实例
      */
     Storage.prototype.destroyed = function () {
-        if (window && this.deep && typeof this.isLocal === 'boolean') {
-            window['$Storage'] = null;
-        }
+        window['$Storage'] = null;
     };
     return Storage;
 }());
 
-export { __Once, __Debounce, __Throttle, __ToTree, __MapToArray, __ArrayToMap, Storage };
+export { __ArrayToMap, __Debounce, __MapToArray, __Once, __Throttle, __ToTree, Storage };
