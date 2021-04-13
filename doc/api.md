@@ -189,8 +189,7 @@ console.log(map)
 #### Storage
 
 -   本地持久化储存实体类
--   @param isLocal {boolean | object} 储存模式，当不为布尔值时，丢弃第二个参数，并且与实例化传入值无关
--   @param deep {boolean} 是否挂载为全局对象，仅在浏览器模式下并且 isLocal 为布尔值时生效。设置 true 时，实例为单例模式。如果确需重新构建，则调用 destroyed 方法后重新实例化
+-   @param isSingleInstance {boolean} - true 是否单例模式
 -   @returns Storage 实例
 
 **代码用例**
@@ -227,4 +226,4 @@ St.destroyed() // 销毁当前实例
 
 **特殊说明**
 
-`Storage` 本地储存类不支持`Node`环境。
+`Storage` 本地储存类支持`Node`环境，但是需要添加第三方库以支持 Storage

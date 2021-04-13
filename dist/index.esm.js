@@ -162,7 +162,7 @@ var __assign = function() {
 
 /**
  * @author jdeseva
- * @date 2021.04.02
+ * @date 2021.04.13
  * @description 本地存储类 v2
  * @homePage https://github.com/jsmini/util-tools
  */
@@ -175,11 +175,7 @@ var Storage = /** @class */ (function () {
     function Storage(isSingleInstance) {
         if (isSingleInstance === void 0) { isSingleInstance = true; }
         this.isSingleInstance = isSingleInstance;
-        this.store = {
-            L: JSON.parse(localStorage.getItem('store') || '{}'),
-            S: JSON.parse(sessionStorage.getItem('store') || '{}'),
-        };
-        // this.addListenerToState()
+        this.store = this.addListenerToState(JSON.parse(sessionStorage.getItem('store') || '{}'), JSON.parse(localStorage.getItem('store') || '{}'));
         return this.singleInstance();
     }
     /**
@@ -198,25 +194,45 @@ var Storage = /** @class */ (function () {
     /**
      * 添加状态监听器
      */
-    Storage.prototype.addListenerToState = function () {
-        Object.defineProperty(this.store, 'S', {
-            enumerable: true,
-            configurable: false,
-            writable: true,
-            set: function (value) {
-                console.log(111, value, this.store);
-                this.store = value;
+    Storage.prototype.addListenerToState = function (session, local) {
+        var _this = this;
+        var L = new Proxy(local, {
+            get: function (target, key) {
+                _this.checkTimeout(local);
+                return target[key];
             },
-            get: function () {
-                console.log(222, this.store);
-                return this.store;
+            set: function (target, key, value) {
+                target[key] = value;
+                localStorage.setItem('store', JSON.stringify(target));
+                return true;
             }
         });
+        var S = new Proxy(session, {
+            get: function (target, key) {
+                _this.checkTimeout(session);
+                return target[key];
+            },
+            set: function (target, key, value) {
+                target[key] = value;
+                sessionStorage.setItem('store', JSON.stringify(target));
+                return true;
+            }
+        });
+        return { L: L, S: S };
     };
     /**
      * 检查储存的数据是否超时
      */
-    Storage.prototype.checkTimeout = function () { };
+    Storage.prototype.checkTimeout = function (ref) {
+        Object.keys(ref).map(function (p) {
+            if (ref[p].hasOwnProperty('delay')) {
+                if (Date.now() >= ref[p].overTime) {
+                    Reflect.deleteProperty(ref, p);
+                }
+            }
+        });
+        return ref;
+    };
     /**
      * 检测数据类型
      * @param data 数据类型
@@ -267,7 +283,7 @@ var Storage = /** @class */ (function () {
      * @param target 储存方法 默认 `sessionStorage` 当该值为 `true` 代表 `localStorage`（类型转换后为`true`也算）
      */
     Storage.prototype.set = function (ref, value, delay, target) {
-        var _this = this;
+        var _this_1 = this;
         var refType = this.checkType(ref);
         var Target = target ? this.store.L : this.store.S;
         if (refType === 'String') {
@@ -278,7 +294,9 @@ var Storage = /** @class */ (function () {
             Target[ref] = result;
         }
         else {
-            Object.keys(ref).forEach(function (p) { return _this.set(p, ref[p]); });
+            Object.keys(ref).forEach(function (p) {
+                return _this_1.set(p, ref[p]);
+            });
         }
         sessionStorage.setItem('store', JSON.stringify(this.store.S));
         localStorage.setItem('store', JSON.stringify(this.store.L));
@@ -289,23 +307,25 @@ var Storage = /** @class */ (function () {
      * @param target 目标，默认 `undefined`，代表 `sessionStorage`, 为 `true` 时代表 `localStorage`（类型转换后为`true`也算）
      */
     Storage.prototype.remove = function (ref, target) {
-        var _this = this;
+        var _this_1 = this;
         var refType = this.checkType(ref);
         var Target = target ? this.store.L : this.store.S;
         if (refType === 'String') {
             Reflect.deleteProperty(Target, ref);
         }
         else {
-            ref.forEach(function (p) { return _this.remove(p); });
+            ref.forEach(function (p) { return _this_1.remove(p); });
         }
     };
     /**
      * 删除 `Storage` 中所有的数据
      */
     Storage.prototype.removeAll = function () {
+        sessionStorage.removeItem('store');
+        localStorage.removeItem('store');
         this.store = {
             L: {},
-            S: {}
+            S: {},
         };
     };
     /**

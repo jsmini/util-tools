@@ -227,13 +227,6 @@ describe('单元测试 | __Debounce 和 __Throttle 测试需要使用命令行�
                 expect(total).to.equal(0)
             })
 
-            // it('页面刷新', () => {
-            //     St.set('deep', 123, 10)
-            //     // window.location.reload()
-            //     const res = St.get('deep')
-            //     expect(res).to.equal(123)
-            // })
-
             it('destroyed', () => {
                 St.destroyed()
                 var k = window['$Storage']

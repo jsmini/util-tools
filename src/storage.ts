@@ -1,13 +1,21 @@
 /**
  * @author jdeseva
- * @date 2021.04.02
+ * @date 2021.04.13
  * @description 本地存储类 v2
  * @homePage https://github.com/jsmini/util-tools
  */
 
 /** ******************************************************** */
 
-type M = string | number | boolean | object | string[] | number[] | boolean[] | object[]
+type M =
+    | string
+    | number
+    | boolean
+    | object
+    | string[]
+    | number[]
+    | boolean[]
+    | object[]
 
 /**
  * 本地持久化储存实体类
@@ -20,11 +28,10 @@ export class Storage {
 
     private constructor(isSingleInstance: boolean = true) {
         this.isSingleInstance = isSingleInstance
-        this.store = {
-            L: JSON.parse(localStorage.getItem('store') || '{}'), // localStorage
-            S: JSON.parse(sessionStorage.getItem('store') || '{}'), // sessionStorage
-        }
-        // this.addListenerToState()
+        this.store = this.addListenerToState(
+            JSON.parse(sessionStorage.getItem('store') || '{}'),
+            JSON.parse(localStorage.getItem('store') || '{}')
+        )
         return this.singleInstance()
     }
 
@@ -45,26 +52,49 @@ export class Storage {
     /**
      * 添加状态监听器
      */
-    private addListenerToState(): void {
-        Object.defineProperty(this.store, 'S', {
-            enumerable: true,
-            configurable: false,
-            writable: true,
-            set<T>(value: T): void {
-                console.log(111, value, this.store)
-                this.store = value
+    private addListenerToState(
+        session: Record<string, Record<string, M>>,
+        local: Record<string, Record<string, M>>
+    ): Record<string, object> {
+        const _this: Storage = this
+        const L = new Proxy(local, {
+            get<T>(target: T, key: string): T {
+                _this.checkTimeout(local)
+                return target[key]
             },
-            get<T>(): T {
-                console.log(222, this.store)
-                return this.store
+            set<T>(target: T, key: string, value: M): boolean {
+                target[key] = value
+                localStorage.setItem('store', JSON.stringify(target))
+                return true
             }
         })
+        const S = new Proxy(session, {
+            get<T>(target: T, key: string): T {
+                _this.checkTimeout(session)
+                return target[key]
+            },
+            set<T>(target: T, key: string, value: M): boolean {
+                target[key] = value
+                sessionStorage.setItem('store', JSON.stringify(target))
+                return true
+            }
+        })
+        return { L, S }
     }
 
     /**
      * 检查储存的数据是否超时
      */
-    private checkTimeout(): void { }
+    private checkTimeout(ref: Record<string, Record<string, M>>): Record<string, Record<string, M>> {
+        Object.keys(ref).map((p: string): void => {
+            if (ref[p].hasOwnProperty('delay')) {
+                if (Date.now() >= ref[p].overTime) {
+                    Reflect.deleteProperty(ref, p)
+                }
+            }
+        })
+        return ref
+    }
 
     /**
      * 检测数据类型
@@ -95,11 +125,12 @@ export class Storage {
         if (typeof key === 'string') {
             return (Target[key] || {}).data // 直接返回结果
         } else {
-            return (key as string[]).reduce((pre: T | object, cur: string): T | M => {
+            return (key as string[]).reduce((pre: T | object, cur: string):
+            | T
+            | M => {
                 return { ...pre, [cur]: (Target[cur] || {}).data }
             }, {})
         }
-
     }
 
     /**
@@ -108,7 +139,10 @@ export class Storage {
      * @returns data
      */
     protected getAll<T>(): T | M {
-        return this.get([...Object.keys(this.store.L), ...Object.keys(this.store.S)])
+        return this.get([
+            ...Object.keys(this.store.L),
+            ...Object.keys(this.store.S),
+        ])
     }
 
     /**
@@ -138,7 +172,9 @@ export class Storage {
             }
             Target[ref as string] = result
         } else {
-            Object.keys(ref as Record<string, T>).forEach((p: string): void => this.set(p, ref[p]))
+            Object.keys(ref as Record<string, T>).forEach((p: string): void =>
+                this.set(p, ref[p])
+            )
         }
         sessionStorage.setItem('store', JSON.stringify(this.store.S))
         localStorage.setItem('store', JSON.stringify(this.store.L))
@@ -163,9 +199,11 @@ export class Storage {
      * 删除 `Storage` 中所有的数据
      */
     protected removeAll(): void {
+        sessionStorage.removeItem('store')
+        localStorage.removeItem('store')
         this.store = {
             L: {},
-            S: {}
+            S: {},
         }
     }
 
