@@ -1,6 +1,6 @@
 /**
  * @author jdeseva
- * @date 2019.10.24
+ * @date 2022.11.29
  * @description 自用工具类函数，包含常用的自定义工具类函数，不定期整理更新。欢迎提出issue
  * @homePage https://github.com/jsmini/util-tools
  */
@@ -74,17 +74,15 @@ export function __Throttle(method: Function, delay: number = 500): Function {
  * @param idKey {string} 主键
  * @returns {Array<object>} 返回的树形结构数据
  */
-export function __ToTree(
-    data: object[],
-    parentIdKey: string,
-    idKey: string = 'id'
-): object[] {
+export function __ToTree<T>( data: T[], parentIdKey: string, idKey: string = 'id'): T[] {
     let _idMap = Object.create(null)
-    data.forEach((row: object): void => {
+
+    data.forEach((row: T): void => {
         _idMap[row[idKey]] = row
     })
-    const result: object[] = []
-    data.forEach((row: object): void => {
+    const result: T[] = []
+
+    data.forEach((row: T): void => {
         let parent = _idMap[row[parentIdKey]]
         if (parent) {
             let v = parent.children || (parent.children = [])
@@ -103,11 +101,7 @@ export function __ToTree(
  * @param {String} [val = value] 键值
  * @returns {Array<Object>} 返回数组
  */
-export function __MapToArray(
-    map: object,
-    key: string = 'name',
-    val: string = 'value'
-): object[] {
+export function __MapToArray<T>( map: Record<string, T>,  key: string = 'name', val: string = 'value'): T[] {
     let res = []
     for (let k in map) {
         var temp = Object.create(null)
@@ -125,13 +119,10 @@ export function __MapToArray(
  * @param {String} [val = value] 键值
  * @returns {Object} 返回map对象字典
  */
-export function __ArrayToMap(
-    array: object[],
-    key: string = 'name',
-    val: string = 'value'
-): object {
+export function __ArrayToMap<T>( array: Record<string, T>[], key: string = 'name', val: string = 'value'): Record<string, T> {
     var res = Object.create(null) // 新建一个纯粹对象
-    array.forEach((row: object): void => {
+
+    array.forEach((row: Record<string, T>): void => {
         res[row[key]] = row[val]
     })
     return res

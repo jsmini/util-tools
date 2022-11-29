@@ -1,6 +1,6 @@
 /**
  * @author jdeseva
- * @date 2021.04.13
+ * @date 2022.11.29
  * @description 本地存储类 v2
  * @homePage https://github.com/jsmini/util-tools
  */
